@@ -2,6 +2,7 @@ package utils;
 
 import java.util.Random;
 
+import interfaces.Filme_IF;
 import models.Filme;
 
 public class FilmeAux {
@@ -14,12 +15,12 @@ public class FilmeAux {
 
     private Random random = new Random();
 
-    public Filme gerarFilme() {
+    public Filme_IF gerarFilme() {
         String nome = this.gerarNome();
         int ano = this.gerarAno();
         int nota = this.gerarNota();
 
-        return new Filme(nome, nota, ano);
+        return new Filme(nome, ano, nota);
     }
 
     private int gerarNota() {
