@@ -66,8 +66,18 @@ public class Lista implements Lista_IF {
             throw new Exception("Lista vazia");
         }
 
-        NoLista auxHead = this.head, auxTail = this.tail;
         Filme_IF aux = null;
+        
+        if (this.head.equals(this.tail)) {
+            aux = this.head.getFilme();
+            
+            this.head = new NoLista();
+            this.tail = this.head;
+
+            return aux;
+        }
+
+        NoLista auxHead = this.head, auxTail = this.tail;
 
         while (!auxHead.equals(auxTail) && !auxHead.getProx().equals(auxTail)) {
             if (auxHead.getFilme().getID() == id) {
@@ -121,6 +131,30 @@ public class Lista implements Lista_IF {
 
             return aux;
         }
+
+        return aux;
+    }
+
+    public Filme_IF removeLast() throws Exception {
+        if (this.isEmpty()) {
+            throw new Exception("Lista vazia");
+        }
+
+        Filme_IF aux = null;
+        
+        if (this.head.equals(this.tail)) {
+            aux = this.head.getFilme();
+            
+            this.head = new NoLista();
+            this.tail = this.head;
+            this.size--;
+
+            return aux;
+        }
+
+        this.tail.getAnt().setProx(this.tail.getProx());
+        this.tail = this.tail.getAnt();
+        this.size--;
 
         return aux;
     }

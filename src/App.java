@@ -1,31 +1,27 @@
 import interfaces.Filme_IF;
-import models.Lista;
+import models.Pilha;
 import utils.FilmeAux;
 
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println();
 
-        Lista lista = new Lista();
+        Pilha pilha = new Pilha();
 
         
         Filme_IF filme = new FilmeAux().gerarFilme();
-        lista.insert(filme);
+        pilha.push(filme);
 
-        for (int i = 0; i < 8; i++) {
-            lista.insert(new FilmeAux().gerarFilme());
+        for (int i = 0; i < 3; i++) {
+            pilha.push(new FilmeAux().gerarFilme());
         }
 
-        Filme_IF filme2 = new FilmeAux().gerarFilme();
-        lista.insert(filme2);
-        
-        for (int i = 0; i < 7; i++) {
-            lista.insert(new FilmeAux().gerarFilme());
-        }
+        pilha.pop();
+        pilha.pop();
+        pilha.pop();
+        pilha.pop();
 
-        lista.remove(filme.getID());
-        System.out.println(lista.search(filme2.getID()).toString());
-        System.out.println(lista.size());
-        System.out.println(lista.search(filme.getID()) == null);
+        System.out.println(pilha.isEmpty());
+        System.out.println(pilha.top().equals(filme));
     }
 }
