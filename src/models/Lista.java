@@ -85,6 +85,8 @@ public class Lista implements Lista_IF {
     
                 if (this.head.equals(auxHead)) {
                     this.head = auxHead.getProx();
+                } else {
+                    auxHead.getAnt().setProx(auxHead.getProx());
                 }
 
                 auxHead.getProx().setAnt(auxHead.getAnt());
@@ -99,6 +101,8 @@ public class Lista implements Lista_IF {
     
                 if (this.tail.equals(auxTail)) {
                     this.tail = auxTail.getAnt();
+                } else {
+                    auxTail.getProx().setAnt(auxTail.getAnt());
                 }
 
                 auxTail.getAnt().setProx(auxTail.getProx());
@@ -152,6 +156,7 @@ public class Lista implements Lista_IF {
             return aux;
         }
 
+        aux = this.tail();
         this.tail.getAnt().setProx(this.tail.getProx());
         this.tail = this.tail.getAnt();
         this.size--;

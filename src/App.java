@@ -1,27 +1,26 @@
 import interfaces.Filme_IF;
-import models.Pilha;
+import models.Fila;
 import utils.FilmeAux;
 
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println();
 
-        Pilha pilha = new Pilha();
-
+        Fila fila = new Fila();
         
         Filme_IF filme = new FilmeAux().gerarFilme();
-        pilha.push(filme);
+        fila.enqueue(filme);
 
         for (int i = 0; i < 3; i++) {
-            pilha.push(new FilmeAux().gerarFilme());
+            fila.enqueue(new FilmeAux().gerarFilme());
         }
 
-        pilha.pop();
-        pilha.pop();
-        pilha.pop();
-        pilha.pop();
+        // fila.dequeue();
+        // fila.dequeue();
+        // fila.dequeue();
+        // fila.dequeue();
 
-        System.out.println(pilha.isEmpty());
-        System.out.println(pilha.top().equals(filme));
+        System.out.println(fila.isEmpty());
+        System.out.println(fila.head().equals(filme));
     }
 }
