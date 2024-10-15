@@ -62,7 +62,7 @@ public class Filme implements Filme_IF {
 
     @Override
     public String toString() {
-        // [id] - Nome (Ano, Nota)
-        return "[" + this.id + "] - " + this.nome + " (" + this.ano + ", " + this.nota + ")";
+        // #id Nome (Ano) [Nota]
+        return "#" + this.id + " " + this.nome + " (" + this.ano + ") [" + this.nota + "]";
     }
 }

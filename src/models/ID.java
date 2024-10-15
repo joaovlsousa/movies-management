@@ -11,9 +11,19 @@ public class ID {
         new IDAux().gerarIDs(1_000)
     );
 
-    public static Integer gerarID() {
+    private static List<Integer> IDsGerados = new ArrayList<Integer>();
+
+    public static int gerarID() {
         int indice = new Random().nextInt(IDs.size());
 
-        return IDs.remove(indice);
-    }     
+        int id = IDs.remove(indice);
+
+        IDsGerados.add(id);
+
+        return id;
+    }
+
+    public static List<Integer> getIDsGerados() {
+        return IDsGerados;
+    }
 }

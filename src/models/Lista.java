@@ -17,12 +17,11 @@ public class Lista implements Lista_IF {
     @Override
     public void insert(Filme_IF elemento) {
         NoLista aux = new NoLista(elemento, new NoLista(), this.tail);
-
         
         if (this.tail.isNIL()) {
             this.head = aux;
         }
-        
+
         this.tail.setProx(aux);
         this.tail = aux;
         this.size++;
@@ -68,7 +67,7 @@ public class Lista implements Lista_IF {
 
         Filme_IF aux = null;
         
-        if (this.head.equals(this.tail)) {
+        if (this.head.equals(this.tail) && this.head.getFilme().getID() == id) {
             aux = this.head.getFilme();
             
             this.head = new NoLista();
