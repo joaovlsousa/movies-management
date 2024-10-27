@@ -1,34 +1,35 @@
-import interfaces.Filme_IF;
-import models.BST;
+import java.util.Scanner;
+
+import models.TabelaHash;
 import utils.FilmeAux;
+import utils.Globals;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        BST tree = new BST();
-        Filme_IF filme = new FilmeAux().gerarFilme();
+        System.out.println();
+        System.out.println();
 
-        System.out.println(tree.isEmpty());
+
+        TabelaHash tabelaHash = new TabelaHash(Globals.QUANT_FILMES);
+        FilmeAux filmeAux = new FilmeAux();
+        Scanner scanner = new Scanner(System.in);
         
-        tree.insert(filme);
+        for (int i = 0; i < Globals.QUANT_FILMES; i++) {
+            tabelaHash.insert(filmeAux.gerarFilme());
+        }
         
-        System.out.println(tree.isEmpty());
+        System.out.println(tabelaHash.print());
+        long id = 0;
 
-        System.out.println(tree.root());
+        do {
+            id = scanner.nextLong();
+            tabelaHash.remove(id);
 
-        // Fila fila = new Fila();
-        
-        // fila.enqueue(filme);
+            System.out.println(tabelaHash.print());
+            System.out.println(tabelaHash.isEmpty());    
+        } while (id > 0);
+        System.out.println(tabelaHash.isEmpty());
 
-        // for (int i = 0; i < 3; i++) {
-        //     fila.enqueue(new FilmeAux().gerarFilme());
-        // }
-
-        // // fila.dequeue();
-        // // fila.dequeue();
-        // // fila.dequeue();
-        // // fila.dequeue();
-
-        // System.out.println(fila.isEmpty());
-        // System.out.println(fila.head().equals(filme));
+        scanner.close();
     }
 }

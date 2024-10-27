@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import utils.Globals;
 import utils.IDAux;
 
 public class ID {
     private static List<Integer> IDs = new ArrayList<Integer>(
-        new IDAux().gerarIDs(1_000)
+        new IDAux().gerarIDs(Globals.QUANT_IDS)
     );
 
     private static List<Integer> IDsGerados = new ArrayList<Integer>();

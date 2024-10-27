@@ -67,11 +67,12 @@ public class Lista implements Lista_IF {
 
         Filme_IF aux = null;
         
-        if (this.head.equals(this.tail) && this.head.getFilme().getID() == id) {
+        if (this.size == 1 && this.head.getFilme().getID() == id) {
             aux = this.head.getFilme();
             
             this.head = new NoLista();
             this.tail = this.head;
+            this.size = 0;
 
             return aux;
         }
@@ -87,7 +88,7 @@ public class Lista implements Lista_IF {
                 } else {
                     auxHead.getAnt().setProx(auxHead.getProx());
                 }
-
+                
                 auxHead.getProx().setAnt(auxHead.getAnt());
     
                 this.size--;
@@ -118,6 +119,12 @@ public class Lista implements Lista_IF {
         if (auxHead.getFilme().getID() == id) {
             aux = auxHead.getFilme();
 
+            if (this.head.equals(auxHead)) {
+                this.head = auxHead.getProx();
+            } else {
+                auxHead.getAnt().setProx(auxHead.getProx());
+            }
+            
             auxHead.getProx().setAnt(auxHead.getAnt());
 
             this.size--;
@@ -127,6 +134,12 @@ public class Lista implements Lista_IF {
 
         if (auxTail.getFilme().getID() == id) {
             aux = auxTail.getFilme();
+
+            if (this.tail.equals(auxTail)) {
+                this.tail = auxTail.getAnt();
+            } else {
+                auxTail.getProx().setAnt(auxTail.getAnt());
+            }
 
             auxTail.getAnt().setProx(auxTail.getProx());
 
@@ -189,5 +202,27 @@ public class Lista implements Lista_IF {
     @Override
     public int size() {
         return this.size;
+    }
+
+    public String toString() {
+        if (this.isEmpty()) {
+            return "[]";
+        }
+
+        StringBuilder result = new StringBuilder("[\n");
+
+        NoLista aux = this.head;
+
+        while (!aux.isNIL()) {
+            result.append(" ");
+            result.append(aux.getFilme().toString());
+            result.append(",\n");
+
+            aux = aux.getProx();
+        }
+
+        result.append("]");
+
+        return result.toString();
     }
 }
