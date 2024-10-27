@@ -8,6 +8,8 @@ public class Filme implements Filme_IF {
     private int ano;
     private int nota;
 
+    public Filme() {}
+
     public Filme(String nome, int ano, int nota) {
         this.id = ID.gerarID();
         this.nome = nome;
