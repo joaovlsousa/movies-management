@@ -9,11 +9,25 @@ public class App {
 
         System.out.println(tree.isEmpty());
         
-        tree.insert(filme);
+        for (int i = 0; i < 10; i++) {
+            tree.insert(new FilmeAux().gerarFilme());
+        }
         
         System.out.println(tree.isEmpty());
+        Filme_IF[] teste = tree.order();
 
-        System.out.println(tree.root());
+        System.out.println();
+        System.out.println();
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println(teste[i]);
+        }
+        
+        System.out.println();
+        System.out.println();
+        System.out.println(tree.treeMinimum());
+        System.out.println(tree.treeMaximum());
+
 
         // Fila fila = new Fila();
         
