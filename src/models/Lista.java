@@ -244,12 +244,8 @@ public class Lista implements Lista_IF {
             auxTail = auxTail.getAnt();
         }
 
-        if (i == j) {
-            filmes[i] = auxHead.getFilme();
-        } else {
-            filmes[i] = auxHead.getFilme();
-            filmes[j] = auxTail.getFilme();
-        }
+        filmes[i] = auxHead.getFilme();
+        filmes[j] = auxTail.getFilme();
 
         return filmes;
     }
