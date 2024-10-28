@@ -12,7 +12,11 @@ public class Pilha implements Pilha_IF {
 
     @Override
     public Filme_IF pop() throws Exception {
-        return this.lista.removeLast();
+        try {
+            return this.lista.removeLast();
+        } catch (Exception e) {
+            throw new Exception("Pilha vazia");
+        }
     }
 
     @Override
@@ -27,6 +31,10 @@ public class Pilha implements Pilha_IF {
 
     @Override
     public Filme_IF top() throws Exception {
-        return this.lista.tail();
+        try {
+            return this.lista.tail();
+        } catch (Exception e) {
+            throw new Exception("Pilha vazia");
+        }
     }
 }

@@ -3,7 +3,6 @@ package models;
 import interfaces.Filme_IF;
 
 public class BTNode {
-
     private Filme_IF filme;
     private BTNode left;
     private BTNode right;
@@ -71,10 +70,11 @@ public class BTNode {
         if (isEmpty()) {
             return "Noh Vazio";
         }
-        return "filme: "+ this.filme +
-        "\nNoh Esquedo: "+ this.left.filme+
-        "\nNoh Direito: "+ this.right.filme+
-        "\nNoh Pai: "+ this.parent.filme;
+
+        return "filme: " + this.filme +
+        "\nNoh Esquedo: " + this.left.filme +
+        "\nNoh Direito: " + this.right.filme +
+        "\nNoh Pai: " + this.parent.filme;
     }
 
     protected int size(BTNode node) {

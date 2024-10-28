@@ -14,7 +14,11 @@ public class Fila implements Fila_IF {
 
     @Override
     public Filme_IF dequeue() throws Exception {
-        return this.p1.pop();
+        try {
+            return this.p1.pop();
+        } catch (Exception e) {
+            throw new Exception("Fila vazia");
+        }
     }
 
     @Override
@@ -47,6 +51,10 @@ public class Fila implements Fila_IF {
 
     @Override
     public Filme_IF head() throws Exception {
-        return this.p1.top();
+        try {
+            return this.p1.top();
+        } catch (Exception e) {
+            throw new Exception("Fila vazia");
+        }
     }
 }

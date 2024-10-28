@@ -17,6 +17,13 @@ public class Filme implements Filme_IF {
         this.nota = nota;
     }
 
+    public Filme(long id, String nome, int ano, int nota) {
+        this.id = id;
+        this.nome = nome;
+        this.ano = ano;
+        this.nota = nota;
+    }
+
     @Override
     public long getID() {
         return this.id;
@@ -64,7 +71,7 @@ public class Filme implements Filme_IF {
 
     @Override
     public String toString() {
-        // #id Nome (Ano) [Nota]
-        return "#" + this.id + " " + this.nome + " (" + this.ano + ") [" + this.nota + "]";
+        // {#id Nome (Ano) [Nota]}
+        return "{#" + this.id + " " + this.nome + " (" + this.ano + ") [" + this.nota + "]}";
     }
 }

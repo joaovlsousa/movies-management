@@ -7,30 +7,14 @@ public class App {
         BST tree = new BST();
         Filme_IF filme = new FilmeAux().gerarFilme();
 
-        // System.out.println(tree.isEmpty());
-        System.out.println(tree.size());
+        System.out.println(tree.isEmpty());
         
-        for (int i = 0; i < 10; i++) {
-            tree.insert(new FilmeAux().gerarFilme());
-        }
-
-        System.out.println();
-        System.out.println();
-        System.out.println(tree.treeMinimum().getFilme());
-        System.out.println(tree.treeMaximum().getFilme());
-        System.out.println();
-        System.out.println();
+        tree.insert(filme);
         
-        Filme_IF[] teste = tree.postOrder();
-        
-        System.out.println();
-        System.out.println();
+        System.out.println(tree.isEmpty());
 
+        System.out.println(tree.root());
 
-
-        for (int j = 0; j < 10; j++) {
-            System.out.println(teste[j]);
-        }
         // Fila fila = new Fila();
         
         // fila.enqueue(filme);
