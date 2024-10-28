@@ -77,4 +77,13 @@ public class BTNode {
         "\nNoh Pai: " + this.parent.filme;
     }
 
+    protected int size(BTNode node) {
+        if (node == null || node.isEmpty()) {
+            return 0;
+        
+        } else {
+            return 1 + size(node.getLeft()) + size(node.getRight());
+        }
+    }
+
 }

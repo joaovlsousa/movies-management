@@ -5,8 +5,6 @@ import utils.Globals;
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println();
-        System.out.println();
-
 
         TabelaHash tabelaHash = new TabelaHash(Globals.QUANT_FILMES);
         FilmeAux filmeAux = new FilmeAux();
