@@ -53,4 +53,71 @@ public class FilmeAux {
 
         return vogais[indexRandom];
     }
+
+    public static void reverseArray(Filme_IF[] filmes) {
+        Filme_IF temp = null;
+
+        for (int i = 0, j = filmes.length - 1; i <= j; i++, j--) {
+            temp = filmes[i];
+            filmes[i] = filmes[j];
+            filmes[j] = temp;
+        }
+    }
+
+    public static void mergeSort(Filme_IF[] filmes) {
+        mergeSortAux(filmes, 0, filmes.length - 1);
+    }
+
+    private static void mergeSortAux(Filme_IF[] filmes, int ini, int fim) {
+        if (ini < fim) {
+            int meio = ini + ((fim - ini) / 2);
+
+            mergeSortAux(filmes, ini, meio);
+            mergeSortAux(filmes, meio + 1, fim);
+            merge(filmes, ini, meio, fim);
+
+        }
+    }
+
+    private static void merge(Filme_IF[] filmes, int ini, int meio, int fim) {
+        int tamEsq = meio - ini + 1;
+        int tamDir = fim - meio;
+
+        Filme_IF[] vetEsq = new Filme[tamEsq];
+        Filme_IF[] vetDir = new Filme[tamDir];
+
+        for (int i = 0; i < tamEsq; i++) {
+            vetEsq[i] = filmes[ini + i];
+        }
+        
+        for (int j = 0; j < tamDir; j++) {
+            vetDir[j] = filmes[meio + 1 + j];
+        }
+
+        int e = 0, d = 0, k = ini;
+
+        while (e < tamEsq && d < tamDir) {
+            if (vetEsq[e].compareTo(vetDir[d]) > 0) {
+                filmes[k] = vetEsq[e];
+                e++;
+            } else {
+                filmes[k] = vetDir[d];
+                d++;
+            }
+
+            k++;
+        }
+
+        while (e < tamEsq) {
+            filmes[k] = vetEsq[e];
+            e++;
+            k++;
+        }
+
+        while (d < tamDir) {
+            filmes[k] = vetDir[d];
+            d++;
+            k++;
+        }
+    }
 }

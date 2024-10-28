@@ -2,6 +2,7 @@ package models;
 
 import interfaces.Filme_IF;
 import interfaces.Lista_IF;
+import utils.FilmeAux;
 
 public class Lista implements Lista_IF {
     private NoLista head;
@@ -211,18 +212,52 @@ public class Lista implements Lista_IF {
 
         StringBuilder result = new StringBuilder("[\n");
 
-        NoLista aux = this.head;
+        Filme_IF[] filmes = this.sort();
 
-        while (!aux.isNIL()) {
+        for (Filme_IF filme : filmes) {
             result.append(" ");
-            result.append(aux.getFilme().toString());
+            result.append(filme.toString());
             result.append(",\n");
-
-            aux = aux.getProx();
         }
 
         result.append("]");
 
         return result.toString();
+    }
+
+    public Filme_IF[] toArray() {
+        if (this.isEmpty()) {
+            return new Filme[0];
+        }
+
+        Filme_IF[] filmes = new Filme[this.size];
+        NoLista auxHead = this.head, auxTail = this.tail;
+        int i = 0, j = this.size - 1;
+
+        while (!auxHead.equals(auxTail) && !auxHead.getProx().equals(auxTail)) {
+            filmes[i] = auxHead.getFilme();
+            filmes[j] = auxTail.getFilme();
+
+            i++;
+            j--;
+            auxHead = auxHead.getProx();
+            auxTail = auxTail.getAnt();
+        }
+
+        if (i == j) {
+            filmes[i] = auxHead.getFilme();
+        } else {
+            filmes[i] = auxHead.getFilme();
+            filmes[j] = auxTail.getFilme();
+        }
+
+        return filmes;
+    }
+
+    private Filme_IF[] sort() {
+        Filme_IF[] filmes = this.toArray();
+        FilmeAux.mergeSort(filmes);
+
+        return filmes;
     }
 }
