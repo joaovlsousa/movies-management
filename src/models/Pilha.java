@@ -37,4 +37,8 @@ public class Pilha implements Pilha_IF {
             throw new Exception("Pilha vazia");
         }
     }
+
+    public String toString() {
+        return this.lista.toString();
+    }
 }

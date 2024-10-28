@@ -1,5 +1,7 @@
 import interfaces.Filme_IF;
 import models.BST;
+import models.Filme;
+import models.Pilha;
 import utils.FilmeAux;
 
 public class App {
@@ -9,25 +11,11 @@ public class App {
 
         System.out.println(tree.isEmpty());
         
-        for (int i = 0; i < 10; i++) {
-            tree.insert(new FilmeAux().gerarFilme());
-        }
+        tree.insert(filme);
         
         System.out.println(tree.isEmpty());
-        Filme_IF[] teste = tree.order();
 
-        System.out.println();
-        System.out.println();
-
-        for (int i = 0; i < 10; i++) {
-            System.out.println(teste[i]);
-        }
-        
-        System.out.println();
-        System.out.println();
-        System.out.println(tree.treeMinimum());
-        System.out.println(tree.treeMaximum());
-
+        System.out.println(tree.root());
 
         // Fila fila = new Fila();
         
@@ -37,12 +25,12 @@ public class App {
         //     fila.enqueue(new FilmeAux().gerarFilme());
         // }
 
-        // // fila.dequeue();
-        // // fila.dequeue();
-        // // fila.dequeue();
-        // // fila.dequeue();
+        Pilha pilha = new Pilha();
 
-        // System.out.println(fila.isEmpty());
-        // System.out.println(fila.head().equals(filme));
+        for (Filme filme : filmes) {
+            pilha.push(filme);
+        }
+
+        System.out.println(pilha.toString());
     }
 }

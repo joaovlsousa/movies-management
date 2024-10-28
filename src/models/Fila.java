@@ -57,4 +57,8 @@ public class Fila implements Fila_IF {
             throw new Exception("Fila vazia");
         }
     }
+
+    public String toString() {
+        return this.p1.toString();
+    }
 }
