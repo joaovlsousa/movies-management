@@ -206,23 +206,7 @@ public class Lista implements Lista_IF {
     }
 
     public String toString() {
-        if (this.isEmpty()) {
-            return "[]";
-        }
-
-        StringBuilder result = new StringBuilder("[\n");
-
-        Filme_IF[] filmes = this.sort();
-
-        for (Filme_IF filme : filmes) {
-            result.append(" ");
-            result.append(filme.toString());
-            result.append(",\n");
-        }
-
-        result.append("]");
-
-        return result.toString();
+        return FilmeAux.toString(this.sort());
     }
 
     public Filme_IF[] toArray() {

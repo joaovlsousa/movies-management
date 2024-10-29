@@ -4,12 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import interfaces.Filme_IF;
 import models.Fila;
 import models.Filme;
 import models.Lista;
 import models.Pilha;
 import models.TabelaHash;
+import utils.FilmeAux;
 
 public class OrdenacaoTest {
     private final Filme[] filmes = {
@@ -18,20 +18,6 @@ public class OrdenacaoTest {
         new Filme(2, "C", 2019, 5),
         new Filme(3, "D", 2020, 5),
     };
-
-    private String toString(Filme[] filmes) {
-        StringBuilder result = new StringBuilder("[\n");
-
-        for (Filme_IF filme : filmes) {
-            result.append(" ");
-            result.append(filme.toString());
-            result.append(",\n");
-        }
-
-        result.append("]");
-
-        return result.toString();
-    }
 
     @Test
     public void testQueueSortedPrint() {
@@ -43,7 +29,7 @@ public class OrdenacaoTest {
             fila.enqueue(filme);
         }
 
-        assertEquals(this.toString(filmes), fila.toString());        
+        assertEquals(FilmeAux.toString(filmes), fila.toString());        
     }
 
     @Test
@@ -56,7 +42,7 @@ public class OrdenacaoTest {
             pilha.push(filme);
         }
 
-        assertEquals(this.toString(filmes), pilha.toString());        
+        assertEquals(FilmeAux.toString(filmes), pilha.toString());        
     }
 
     @Test
@@ -69,7 +55,7 @@ public class OrdenacaoTest {
             lista.insert(filme);
         }
 
-        assertEquals(this.toString(filmes), lista.toString());        
+        assertEquals(FilmeAux.toString(filmes), lista.toString());        
     }
 
     @Test
@@ -86,9 +72,9 @@ public class OrdenacaoTest {
 
         StringBuilder result = new StringBuilder();
 
-        result.append(this.toString(f1));
+        result.append(FilmeAux.toString(f1));
         result.append(",\n");
-        result.append(this.toString(f2));
+        result.append(FilmeAux.toString(f2));
         result.append("\n");
 
         assertEquals(result.toString(), tabelaHash.print());        

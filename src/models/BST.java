@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import interfaces.BST_IF;
 import interfaces.Filme_IF;
+import utils.FilmeAux;
 
 public class BST implements BST_IF {
     protected BTNode root;
@@ -64,7 +65,7 @@ public class BST implements BST_IF {
             if (aux.getLeft().isEmpty() && aux.getRight().isEmpty()) {
 
                 if (aux == root) {
-                    root = new BTNode(auxParent);
+                    root = new BTNode();
                     
                 }else if (auxParent.getLeft() == aux) {
                     auxParent.setLeft(new BTNode(auxParent));
@@ -350,5 +351,9 @@ public class BST implements BST_IF {
 
     public void visitNode(BTNode node) {
         System.out.println(node.getFilme());
+    }
+
+    public String toString() {
+        return FilmeAux.toString(this.order());
     }
 }

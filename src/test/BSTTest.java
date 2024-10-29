@@ -11,12 +11,27 @@ import org.junit.Test;
 
 import interfaces.Filme_IF;
 import models.BST;
+import models.Filme;
 import utils.FilmeAux;
 import utils.Globals;
 
 public class BSTTest {
     private BST tree;
     private FilmeAux filmeAux = new FilmeAux();
+
+    private final Filme[] filmes = {
+        new Filme(2, "C", 2019, 5),
+        new Filme(0, "A", 2020, 5),
+        new Filme(3, "D", 2020, 5),
+        new Filme(1, "B", 2021, 4),
+    };
+
+    private final Filme[] filmesOrdenados = {
+        new Filme(0, "A", 2020, 5),
+        new Filme(1, "B", 2021, 4),
+        new Filme(2, "C", 2019, 5),
+        new Filme(3, "D", 2020, 5),
+    };
 
     @Before
     public void init() {
@@ -70,17 +85,31 @@ public class BSTTest {
     public void testRemoveElement() {
         try {
             Filme_IF f = filmeAux.gerarFilme();
+            tree.insert(f);
+
+            assertNull(tree.remove(Globals.QUANT_IDS + 1));
+            assertNotNull(tree.remove(f.getID()));
+            assertEquals(0, tree.size());
+
             tree.insert(filmeAux.gerarFilme());
             tree.insert(f);
             tree.insert(filmeAux.gerarFilme());
             tree.insert(filmeAux.gerarFilme());
 
-            assertNull(tree.remove(Globals.QUANT_IDS + 1));
             assertNotNull(tree.remove(f.getID()));
-            // assertEquals(1, tree.size());
+            assertEquals(3, tree.size());
         } catch (Exception e) {
             assertEquals("A arvore está vazia", e.getMessage());
         }
+    }
+
+    @Test
+    public void testInOrder() {
+        for (Filme filme : filmes) {
+            tree.insert(filme);
+        }
+
+        assertEquals(FilmeAux.toString(filmesOrdenados), tree.toString());
     }
 
     @Test
