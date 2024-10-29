@@ -62,7 +62,11 @@ public class BST implements BST_IF {
         if (!aux.isEmpty()) {
             // se é folha
             if (aux.getLeft().isEmpty() && aux.getRight().isEmpty()) {
-                if (auxParent.getLeft().getFilme().compareTo(aux.getFilme()) == 0) {
+
+                if (aux == root) {
+                    root = new BTNode(auxParent);
+                    
+                }else if (auxParent.getLeft() == aux) {
                     auxParent.setLeft(new BTNode(auxParent));
                 
                 } else {
@@ -72,9 +76,9 @@ public class BST implements BST_IF {
             } else if ((aux.getLeft().isEmpty() && !aux.getRight().isEmpty()) 
             || (!aux.getLeft().isEmpty() && aux.getRight().isEmpty())) {
 
-                if (aux.getFilme().compareTo(root()) != 0) {
+                if (aux != root) {
                     
-                    if (auxParent.getLeft().getFilme().compareTo(aux.getFilme()) == 0) {
+                    if (auxParent.getLeft() == aux) {
                         
                         if (!aux.getLeft().isEmpty()) {
                             aux.getLeft().setParent(auxParent);
