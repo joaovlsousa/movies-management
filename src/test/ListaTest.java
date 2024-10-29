@@ -13,6 +13,7 @@ import org.junit.Test;
 import interfaces.Filme_IF;
 import models.Lista;
 import utils.FilmeAux;
+import utils.Globals;
 
 public class ListaTest {
     private Lista lista;
@@ -53,7 +54,7 @@ public class ListaTest {
             Filme_IF f = filmeAux.gerarFilme();
             lista.insert(f);
 
-            assertNull(lista.search(-1));
+            assertNull(lista.search(Globals.QUANT_IDS + 1));
             assertNotNull(lista.search(f.getID()));
         } catch (Exception e) {
             assertEquals("Lista vazia", e.getMessage());
@@ -67,7 +68,7 @@ public class ListaTest {
             lista.insert(f);
             lista.insert(filmeAux.gerarFilme());
 
-            assertNull(lista.remove(-1));
+            assertNull(lista.remove(Globals.QUANT_IDS + 1));
             assertNotNull(lista.remove(f.getID()));
         } catch (Exception e) {
             assertEquals("Lista vazia", e.getMessage());
