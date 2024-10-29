@@ -1,5 +1,6 @@
 package models;
 
+import com.sun.source.doctree.ReturnTree;
 import interfaces.BST_IF;
 import interfaces.Filme_IF;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class BST implements BST_IF {
 
     @Override
     public void insert(Filme_IF element) {
-        if (root != null) {            
+        if (root != null && element != null) {            
             if (root.isEmpty()) {
                 root.setFilme(element);
     
@@ -48,12 +49,10 @@ public class BST implements BST_IF {
         if (this.search(id) == null) {
             throw new UnsupportedOperationException("Filme nao encontrado");
         }
-
-        
+ 
         removeAux(searchNode(id));
         return this.search(id);
     }
-
 
     
 
@@ -62,8 +61,14 @@ public class BST implements BST_IF {
         BTNode auxParent = aux.getParent();
 
         if (!aux.isEmpty()) {
+            // se é folha
             if (aux.getLeft().isEmpty() && aux.getRight().isEmpty()) {
-                aux = new BTNode(auxParent); 
+                if (auxParent.getLeft().getFilme().compareTo(aux.getFilme()) == 0) {
+                    auxParent.setLeft(new BTNode(auxParent));
+                
+                } else {
+                    auxParent.setRight(new BTNode(auxParent));
+                }
                 
             } else if ((aux.getLeft().isEmpty() && !aux.getRight().isEmpty()) 
             || (!aux.getLeft().isEmpty() && aux.getRight().isEmpty())) {
@@ -73,40 +78,42 @@ public class BST implements BST_IF {
                     if (auxParent.getLeft().getFilme().compareTo(aux.getFilme()) == 0) {
                         
                         if (!aux.getLeft().isEmpty()) {
-                            auxParent.setLeft(aux.getLeft());
                             aux.getLeft().setParent(auxParent);
+                            auxParent.setLeft(aux.getLeft());
 
                         } else {
-                            auxParent.setLeft(aux.getRight());
                             aux.getRight().setParent(auxParent);
+                            auxParent.setLeft(aux.getRight());
                         }
                     } else {
 
                         if (!aux.getLeft().isEmpty()) {
-                            auxParent.setRight(aux.getLeft());
                             aux.getLeft().setParent(auxParent);
+                            auxParent.setRight(aux.getLeft());
 
                         } else {
-                            auxParent.setRight(aux.getRight());
+
                             aux.getRight().setParent(auxParent);
+                            auxParent.setRight(aux.getRight());
                         }
                     }
 
                 } else {
                     if (aux.getLeft().isEmpty()) {
                         root = aux.getRight();
-                        aux.getRight().setParent(root);
+                        root.setParent(new BTNode(null));
                         
                     } else {
                         root = aux.getLeft();
-                        aux.getLeft().setParent(root);
+                        root.setParent(new BTNode(null));
                         
                     }
                 }
             } else {
+                
                 BTNode successor = successor(aux);
-                aux.setFilme(successor.getFilme());
                 removeAux(successor);
+                aux.setFilme(successor.getFilme());
             }
         }
 
@@ -116,7 +123,7 @@ public class BST implements BST_IF {
 
     @Override
     public Filme_IF search(long id) throws Exception {
-        if (this.root.isEmpty() || this.root == null) {
+        if (this.root == null || this.root.isEmpty()) {
             throw new UnsupportedOperationException("A arvore está vazia");
         }
 
@@ -125,7 +132,8 @@ public class BST implements BST_IF {
 
         BTNode aux = root;
 
-        while (!aux.isEmpty()) {
+        while (!aux.isEmpty() && aux.getFilme().compareTo(filmeAux) != 0) {
+
             if (aux.getFilme().compareTo(filmeAux) < 0) {
                 aux = aux.getLeft();
             } else {
@@ -133,17 +141,13 @@ public class BST implements BST_IF {
             }
         }
 
-        aux = aux.getParent();
-
-        if (aux.getFilme().compareTo(filmeAux) == 0) {
-            return aux.getFilme();
-        }
-
-        return null;
+        return aux.getFilme();
     }
 
+
+
     public BTNode searchNode(long id) throws Exception {
-        if (this.root.isEmpty() || this.root == null) {
+        if (this.root == null || this.root.isEmpty()) {
             throw new UnsupportedOperationException("A arvore está vazia");
         }
 
@@ -152,7 +156,7 @@ public class BST implements BST_IF {
 
         BTNode aux = root;
 
-        while (!aux.isEmpty()) {
+        while (!aux.isEmpty() && aux.getFilme().compareTo(filmeAux) != 0) {
             if (aux.getFilme().compareTo(filmeAux) < 0) {
                 aux = aux.getLeft();
             } else {
@@ -160,13 +164,11 @@ public class BST implements BST_IF {
             }
         }
 
-        aux = aux.getParent();
-
-        if (aux.getFilme().compareTo(filmeAux) == 0) {
-            return aux;
+        if (aux.isEmpty()) {
+            return new BTNode();
         }
 
-        return new BTNode();
+        return aux;
     }
     
     @Override
@@ -185,7 +187,18 @@ public class BST implements BST_IF {
 
     @Override
     public int height() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return heightAux(root) - 1;
+    }
+
+    public int heightAux(BTNode node) {
+        if (node.isEmpty()) {
+            return 0;
+        }
+        return 1 + maxHeight(heightAux(node.getLeft()), heightAux(node.getRight()));
+    }
+
+    private int maxHeight(int x, int y) {
+        return (x > y) ? x : (y > x) ? y : x;
     }
 
     @Override
@@ -205,7 +218,7 @@ public class BST implements BST_IF {
 
     @Override
     public boolean isComplete() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Math.pow(2, height()+1) - 1 == size();
     }
 
     @Override
@@ -310,22 +323,23 @@ public class BST implements BST_IF {
     }
 
     public BTNode successor(BTNode node) {
-        if (!node.getRight().isEmpty() && node.getRight() != null) {
+        if (node.getRight() != null && !node.getRight().isEmpty()) {
             return treeMinimum(node.getRight());
         }
         BTNode aux = node;
         BTNode auxParent = aux.getParent();
 
-        while (!auxParent.isEmpty() && aux == auxParent.getRight()) { 
+        while (!auxParent.isEmpty() && auxParent.getRight() == aux) { 
             aux = auxParent;
             auxParent = auxParent.getParent();
         }
 
         return auxParent;
     }
+    // auxParent.getRight().getFilme().compareTo(aux.getFilme()) == 0
 
     public BTNode predecessor(BTNode node) {
-        if (!node.getLeft().isEmpty() && node.getLeft() != null) {
+        if (node.getLeft() != null && !node.getLeft().isEmpty()) {
             return treeMaximum(node.getLeft());
         }
         BTNode aux = node;
