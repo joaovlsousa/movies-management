@@ -15,30 +15,51 @@ public class BST implements BST_IF {
 
     @Override
     public void insert(Filme_IF element) {
-        if (root != null && element != null) {            
-            if (root.isEmpty()) {
-                root.setFilme(element);
+        if (element != null) {
+            insertAux(this.root, element);
+        }
+
+    }
+
+    protected void insertAux(BTNode node, Filme_IF element) {
+        if (node.isEmpty()) {
+            node.setFilme(element);
+            node.setLeft(new BTNode(node));
+            node.setRight(new BTNode(node));
+        
+        } else {
+            if (node.getFilme().compareTo(element) < 0) {
+                insertAux(node.getLeft(), element);
+            
             } else {
-                BTNode aux = root;
-
-                while (!aux.isEmpty()) {
-                    if (aux.getFilme().compareTo(element) < 0) {
-                        aux = aux.getLeft();
-                    } else {
-                        aux = aux.getRight();
-                    }
-                }
-
-                aux = aux.getParent();
-
-                if (aux.getFilme().compareTo(element) < 0) {
-                    aux.setLeft(new BTNode(element, aux));
-                } else {
-                    aux.setRight(new BTNode(element, aux));
-                }
+                insertAux(node.getRight(), element);
             }
         }
     }
+
+    // if (root != null && element != null) {            
+    //     if (root.isEmpty()) {
+    //         root.setFilme(element);
+    //     } else {
+    //         BTNode aux = root;
+
+    //         while (!aux.isEmpty()) {
+    //             if (aux.getFilme().compareTo(element) < 0) {
+    //                 aux = aux.getLeft();
+    //             } else {
+    //                 aux = aux.getRight();
+    //             }
+    //         }
+
+    //         aux = aux.getParent();
+
+    //         if (aux.getFilme().compareTo(element) < 0) {
+    //             aux.setLeft(new BTNode(element, aux));
+    //         } else {
+    //             aux.setRight(new BTNode(element, aux));
+    //         }
+    //     }
+    // }
 
     @Override
     public Filme_IF remove(long id) throws Exception {
@@ -65,7 +86,7 @@ public class BST implements BST_IF {
             if (aux.getLeft().isEmpty() && aux.getRight().isEmpty()) {
 
                 if (aux == root) {
-                    root = new BTNode(auxParent);
+                    root = new BTNode();
                     
                 }else if (auxParent.getLeft() == aux) {
                     auxParent.setLeft(new BTNode(auxParent));
@@ -190,7 +211,7 @@ public class BST implements BST_IF {
 
     public int heightAux(BTNode node) {
         if (node.isEmpty()) {
-            return -1;
+            return - 1;
         }
         return 1 + maxHeight(heightAux(node.getLeft()), heightAux(node.getRight()));
     }
@@ -331,7 +352,6 @@ public class BST implements BST_IF {
 
         return auxParent;
     }
-    // auxParent.getRight().getFilme().compareTo(aux.getFilme()) == 0
 
     public BTNode predecessor(BTNode node) {
         if (node.getLeft() != null && !node.getLeft().isEmpty()) {
