@@ -17,14 +17,15 @@ public class App {
         BST tree = new BST();
 
         for (int i = 0; i < 2; i++) {
-            tree.insert(teste[i]);;
+            tree.insert(teste[i]);
         }
 
         // Filme_IF f = filmeAux.gerarFilme();
         // f.setID(1);
         System.out.println(tree.searchNode(1));
-        tree.remove(2);
-        System.out.println(tree.searchNode(1));
+        // tree.remove(2);
+        System.out.println(tree.searchNode(2));
+        System.out.println(tree.height());
 
 
         // System.out.println(f.toString());
