@@ -15,6 +15,16 @@ public class FilmeAux {
 
     private Random random = new Random();
 
+    public Filme_IF[] gerarFilmes(int quantFilmes) {
+        Filme_IF[] filmes = new Filme_IF[quantFilmes];
+
+        for (int i = 0; i < filmes.length; i++) {
+            filmes[i] = this.gerarFilme();
+        }
+
+        return filmes;
+    }
+
     public Filme_IF gerarFilme() {
         String nome = this.gerarNome();
         int ano = this.gerarAno();

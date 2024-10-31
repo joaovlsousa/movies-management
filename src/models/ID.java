@@ -15,13 +15,19 @@ public class ID {
     private static List<Integer> IDsGerados = new ArrayList<Integer>();
 
     public static int gerarID() {
-        int indice = new Random().nextInt(IDs.size());
+        int index = new Random().nextInt(IDs.size());
 
-        int id = IDs.remove(indice);
+        int id = IDs.remove(index);
 
         IDsGerados.add(id);
 
         return id;
+    }
+
+    public static int getRandomGeneratedID() {
+        int index = new Random().nextInt(IDsGerados.size());
+
+        return IDs.get(index);
     }
 
     public static List<Integer> getIDsGerados() {
