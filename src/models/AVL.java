@@ -17,11 +17,9 @@ public class AVL extends BST implements AVL_IF{
             node.setFilme(element);
             node.setLeft(new BTNode(node));
             node.setRight(new BTNode(node));
-        
         } else {
             if (node.getFilme().compareTo(element) < 0) {
                 insertAux(node.getLeft(), element);
-            
             } else {
                 insertAux(node.getRight(), element);
             }
@@ -32,32 +30,25 @@ public class AVL extends BST implements AVL_IF{
 
 
     private void rebalance(BTNode node) {
-        int balance = calculateBalance(node);
-        
-        if (Math.abs(balance) > 1){
+        System.out.println(node);
+        System.out.println();
 
-            if (calculateBalance(node) > 0 &&
-            calculateBalance(node.getLeft()) >= 0) {
+        int nodeBalance = calculateBalance(node);
 
+        if (Math.abs(nodeBalance) > 1){
+            int nodeRightBalance = calculateBalance(node.getRight());
+            int nodeLeftBalance = calculateBalance(node.getLeft());
+
+            if (nodeBalance > 0 && nodeLeftBalance >= 0) {
                 rightRotation(node);
-
-            } else if (calculateBalance(node) < 0 && 
-            calculateBalance(node.getRight()) <= 0) {
-
+            } else if (nodeBalance < 0 && nodeRightBalance <= 0) {
                 leftRotation(node);
-
-            } else if (calculateBalance(node) > 0 && 
-            calculateBalance(node.getLeft()) < 0) {
-
+            } else if (nodeBalance > 0 &&  nodeLeftBalance < 0) {
                 leftRotation(node.getLeft());
                 rightRotation(node);
-                
-            } else if (calculateBalance(node) < 0 && 
-            calculateBalance(node.getRight()) > 0) {
-
+            } else if (nodeBalance < 0 && nodeRightBalance > 0) {
                 rightRotation(node.getRight());
                 leftRotation(node);
-
             }
         }
     }
@@ -73,9 +64,7 @@ public class AVL extends BST implements AVL_IF{
 
 
     private int calculateBalance(BTNode node) {
-
         return heightAux(node.getLeft()) - heightAux(node.getRight());
-        
     }
 
     private void rightRotation(BTNode node) {

@@ -26,40 +26,14 @@ public class BST implements BST_IF {
             node.setFilme(element);
             node.setLeft(new BTNode(node));
             node.setRight(new BTNode(node));
-        
         } else {
             if (node.getFilme().compareTo(element) < 0) {
                 insertAux(node.getLeft(), element);
-            
             } else {
                 insertAux(node.getRight(), element);
             }
         }
     }
-
-    // if (root != null && element != null) {            
-    //     if (root.isEmpty()) {
-    //         root.setFilme(element);
-    //     } else {
-    //         BTNode aux = root;
-
-    //         while (!aux.isEmpty()) {
-    //             if (aux.getFilme().compareTo(element) < 0) {
-    //                 aux = aux.getLeft();
-    //             } else {
-    //                 aux = aux.getRight();
-    //             }
-    //         }
-
-    //         aux = aux.getParent();
-
-    //         if (aux.getFilme().compareTo(element) < 0) {
-    //             aux.setLeft(new BTNode(element, aux));
-    //         } else {
-    //             aux.setRight(new BTNode(element, aux));
-    //         }
-    //     }
-    // }
 
     @Override
     public Filme_IF remove(long id) throws Exception {
@@ -210,9 +184,10 @@ public class BST implements BST_IF {
     }
 
     public int heightAux(BTNode node) {
-        if (node.isEmpty()) {
+        if (node.isNIL()) {
             return - 1;
         }
+
         return 1 + maxHeight(heightAux(node.getLeft()), heightAux(node.getRight()));
     }
 
