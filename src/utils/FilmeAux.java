@@ -54,6 +54,24 @@ public class FilmeAux {
         return vogais[indexRandom];
     }
 
+    public static String toString(Filme_IF[] filmes) {
+        if (filmes.length == 0) {
+            return "[]";
+        }
+
+        StringBuilder result = new StringBuilder("[\n");
+
+        for (Filme_IF filme : filmes) {
+            result.append(" ");
+            result.append(filme.toString());
+            result.append(",\n");
+        }
+
+        result.append("]");
+
+        return result.toString();
+    }
+
     public static void reverseArray(Filme_IF[] filmes) {
         Filme_IF temp = null;
 

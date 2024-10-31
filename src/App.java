@@ -5,7 +5,9 @@ import utils.FilmeAux;
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println();
-        Filme_IF[] teste = new Filme_IF[2];
+        System.out.println(" ");
+
+        BST tree = new BST();
         FilmeAux filmeAux = new FilmeAux();
 
         for (int i = 0; i < 2; i++) {
@@ -17,15 +19,14 @@ public class App {
         BST tree = new BST();
 
         for (int i = 0; i < 2; i++) {
-            tree.insert(teste[i]);
+            tree.insert(teste[i]);;
         }
 
         // Filme_IF f = filmeAux.gerarFilme();
         // f.setID(1);
         System.out.println(tree.searchNode(1));
-        // tree.remove(2);
-        System.out.println(tree.searchNode(2));
-        System.out.println(tree.height());
+        tree.remove(2);
+        System.out.println(tree.searchNode(1));
 
 
         // System.out.println(f.toString());
