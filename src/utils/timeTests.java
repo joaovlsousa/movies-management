@@ -4,12 +4,9 @@ import interfaces.Filme_IF;
 import models.AVL;
 
 public class TimeTests {
-    
     public void startTests(int amount, AVL tree) {
         Filme_IF[] filmes = new FilmeAux().gerarFilmes(amount);
         long time;
-
-
         
         System.out.println("----- TEMPOS DAS OPERAÇÕES - AVL -----");
         time = System.nanoTime();
