@@ -181,7 +181,7 @@ public class App {
         System.out.println();
         System.out.println(" ");
 
-        Filme_IF[] teste = new FilmeAux().gerarFilmes(100);
+        Filme_IF[] teste = new FilmeAux().gerarFilmes(1000);
         AVL tree = new AVL();
 
         // teste[0].setID(2);
@@ -193,12 +193,13 @@ public class App {
         // teste[6].setID(9);
         // teste[7].setID(10);
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             tree.insert(teste[i]);
         }
         tree.searchNode(0);
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             System.out.println(tree.searchNode(teste[i].getID()));
+            System.out.println();
         }
 
         // tree.search(8);
