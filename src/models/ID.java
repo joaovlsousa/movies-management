@@ -27,7 +27,7 @@ public class ID {
     public static int getRandomGeneratedID() {
         int index = new Random().nextInt(IDsGerados.size());
 
-        return IDs.get(index);
+        return IDsGerados.get(index);
     }
 
     public static List<Integer> getIDsGerados() {

@@ -37,6 +37,18 @@ public class BTNode {
         return this.filme == null;
     }
 
+    public boolean isNIL() {
+        if (this.filme == null && this.left == null && this.right == null && this.parent != null) {
+            return true;
+        }
+
+        if (this.filme == null && this.parent == null) {
+            return true;
+        }
+
+        return false;
+    }
+
     public BTNode getLeft() {
         return this.left;
     } 
