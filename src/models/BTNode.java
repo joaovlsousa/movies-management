@@ -7,12 +7,14 @@ public class BTNode {
     private BTNode left;
     private BTNode right;
     private BTNode parent;
+    private int altura;
     
     public BTNode() {
         this.filme = null;
         this.parent = new BTNode(null);    
         this.left = new BTNode(this);
         this.right = new BTNode(this);
+        this.altura = -1;
     }
 
     public BTNode(BTNode parent) {
@@ -20,6 +22,7 @@ public class BTNode {
         this.parent = parent;
         this.left = null;
         this.right = null;
+        this.altura = -1;
     }
 
     public BTNode(Filme_IF filme, BTNode parent) {
@@ -27,6 +30,7 @@ public class BTNode {
         this.parent = parent;    
         this.left = new BTNode(this);
         this.right = new BTNode(this);
+        this.altura = -1;
     }
     
     public boolean isEmpty() {
@@ -84,6 +88,14 @@ public class BTNode {
         } else {
             return 1 + size(node.getLeft()) + size(node.getRight());
         }
+    }
+
+    public int getAltura() {
+        return altura;
+    }
+
+    public void setAltura(int altura) {
+        this.altura = altura;
     }
 
 }

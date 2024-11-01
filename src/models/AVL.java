@@ -17,16 +17,16 @@ public class AVL extends BST implements AVL_IF{
             node.setFilme(element);
             node.setLeft(new BTNode(node));
             node.setRight(new BTNode(node));
-        
         } else {
             if (node.getFilme().compareTo(element) < 0) {
                 insertAux(node.getLeft(), element);
-            
+                
             } else {
                 insertAux(node.getRight(), element);
             }
-
+            
             rebalance(node);
+
         }
     }
 
@@ -85,40 +85,26 @@ public class AVL extends BST implements AVL_IF{
         node.setLeft(pivot.getRight());
         pivot.getRight().setParent(node);
 
+        swap(node, pivot);
+
         pivot.setRight(node);
-        pivot.setParent(node.getParent());
-
-        if (!pivot.getParent().isEmpty()) {
-            pivot.getParent().setLeft(pivot);
-        }
-
         node.setParent(pivot);
-        
-        if (node == this.root) {
-            this.root = pivot;
-        }
 
     }
+
+    
     
     private void leftRotation(BTNode node) {
 
         BTNode pivot = node.getRight();
-
         node.setRight(pivot.getLeft());
+
         pivot.getLeft().setParent(node);
 
+        swap(node, pivot);
+
         pivot.setLeft(node);
-        pivot.setParent(node.getParent());
-
-        if (!pivot.getParent().isEmpty()) {
-            pivot.getParent().setRight(pivot);
-        }
-
         node.setParent(pivot);
-        
-        if (node == this.root) {
-            this.root = pivot;
-        }
 
     }
 
@@ -208,4 +194,41 @@ public class AVL extends BST implements AVL_IF{
             }
         }
     }
+
+
+
+    private void swap(BTNode node, BTNode pivot) {
+        if (!node.getParent().isEmpty()) {
+            
+            if (node.getParent().getLeft() == node) {
+                node.getParent().setLeft(pivot);
+            
+            } else {
+                node.getParent().setRight(pivot);
+            }
+        } else {
+
+            root = pivot;
+        }
+        pivot.setParent(node.getParent());
+    }
+    
 }
+
+// private void swap(BTNode node, BTNode pivot) {
+//     if (!node.getParent().isEmpty()) {
+        
+//         if (node.getParent().getLeft() == node) {
+//             node.getParent().setLeft(pivot);
+        
+//         } else {
+//             node.getParent().setRight(pivot);
+//         }
+//     } else {
+
+//         root = pivot;
+//     }
+//     if (!pivot.isEmpty()) {
+//         pivot.setParent(node.getParent());
+//     }
+// }

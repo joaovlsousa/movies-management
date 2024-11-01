@@ -1,9 +1,8 @@
 package models;
 
-import java.util.ArrayList;
-
 import interfaces.BST_IF;
 import interfaces.Filme_IF;
+import java.util.ArrayList;
 import utils.FilmeAux;
 
 public class BST implements BST_IF {
@@ -26,6 +25,7 @@ public class BST implements BST_IF {
             node.setFilme(element);
             node.setLeft(new BTNode(node));
             node.setRight(new BTNode(node));
+            node.setAltura(heightAux(node));
         
         } else {
             if (node.getFilme().compareTo(element) < 0) {
@@ -210,14 +210,11 @@ public class BST implements BST_IF {
     }
 
     public int heightAux(BTNode node) {
-        if (node.isEmpty()) {
-            return - 1;
+        if (node == null || node.isEmpty()) {
+            return 0 ;
         }
-        return 1 + maxHeight(heightAux(node.getLeft()), heightAux(node.getRight()));
-    }
 
-    private int maxHeight(int x, int y) {
-        return (x > y) ? x : (y > x) ? y : x;
+        return 1 + Math.max(heightAux(node.getLeft()), heightAux(node.getRight()));
     }
 
     @Override
@@ -242,7 +239,7 @@ public class BST implements BST_IF {
     @Override
     public Filme_IF[] preOrder() {
         if (root != null && !root.isEmpty()) {
-            ArrayList<Filme_IF> filmes = new ArrayList<Filme_IF>();
+            ArrayList<Filme_IF> filmes = new ArrayList<>();
             preOrderAux(root, filmes);
 
             return filmes.toArray(new Filme_IF[0]);
@@ -263,7 +260,7 @@ public class BST implements BST_IF {
     @Override
     public Filme_IF[] order() {
         if (root != null && !root.isEmpty()) {
-            ArrayList<Filme_IF> filmes = new ArrayList<Filme_IF>();
+            ArrayList<Filme_IF> filmes = new ArrayList<>();
             orderAux(root, filmes);
 
             return filmes.toArray(new Filme_IF[0]);
@@ -284,7 +281,7 @@ public class BST implements BST_IF {
     @Override
     public Filme_IF[] postOrder() {
         if (root != null && !root.isEmpty()) {
-            ArrayList<Filme_IF> filmes = new ArrayList<Filme_IF>();
+            ArrayList<Filme_IF> filmes = new ArrayList<>();
             postOrderAux(root, filmes);
 
             return filmes.toArray(new Filme_IF[0]);
@@ -372,6 +369,7 @@ public class BST implements BST_IF {
         System.out.println(node.getFilme());
     }
 
+    @Override
     public String toString() {
         return FilmeAux.toString(this.order());
     }
