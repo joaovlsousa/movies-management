@@ -20,7 +20,7 @@ public class AVL extends BST implements AVL_IF{
         } else {
             if (node.getFilme().compareTo(element) < 0) {
                 insertAux(node.getLeft(), element);
-            
+                
             } else {
                 insertAux(node.getRight(), element);
             }
@@ -32,25 +32,32 @@ public class AVL extends BST implements AVL_IF{
 
 
     private void rebalance(BTNode node) {
-        System.out.println(node);
-        System.out.println();
+        int balance = calculateBalance(node);
+        
+        if (Math.abs(balance) > 1){
 
-        int nodeBalance = calculateBalance(node);
+            if (calculateBalance(node) > 0 &&
+            calculateBalance(node.getLeft()) >= 0) {
 
-        if (Math.abs(nodeBalance) > 1){
-            int nodeRightBalance = calculateBalance(node.getRight());
-            int nodeLeftBalance = calculateBalance(node.getLeft());
-
-            if (nodeBalance > 0 && nodeLeftBalance >= 0) {
                 rightRotation(node);
-            } else if (nodeBalance < 0 && nodeRightBalance <= 0) {
+
+            } else if (calculateBalance(node) < 0 && 
+            calculateBalance(node.getRight()) <= 0) {
+
                 leftRotation(node);
-            } else if (nodeBalance > 0 &&  nodeLeftBalance < 0) {
+
+            } else if (calculateBalance(node) > 0 && 
+            calculateBalance(node.getLeft()) < 0) {
+
                 leftRotation(node.getLeft());
                 rightRotation(node);
-            } else if (nodeBalance < 0 && nodeRightBalance > 0) {
+                
+            } else if (calculateBalance(node) < 0 && 
+            calculateBalance(node.getRight()) > 0) {
+
                 rightRotation(node.getRight());
                 leftRotation(node);
+
             }
         }
     }
@@ -66,7 +73,9 @@ public class AVL extends BST implements AVL_IF{
 
 
     private int calculateBalance(BTNode node) {
+
         return heightAux(node.getLeft()) - heightAux(node.getRight());
+        
     }
 
     private void rightRotation(BTNode node) {
