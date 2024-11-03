@@ -1,5 +1,6 @@
-import interfaces.Filme_IF;
 import java.util.Scanner;
+
+import interfaces.Filme_IF;
 import models.AVL;
 import models.BST;
 import models.Fila;
@@ -11,7 +12,7 @@ import utils.FilmeAux;
 import utils.Menus;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.out.println();
         System.out.println(" ");
 

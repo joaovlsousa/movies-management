@@ -214,21 +214,3 @@ public class AVL extends BST implements AVL_IF{
     }
     
 }
-
-// private void swap(BTNode node, BTNode pivot) {
-//     if (!node.getParent().isEmpty()) {
-        
-//         if (node.getParent().getLeft() == node) {
-//             node.getParent().setLeft(pivot);
-        
-//         } else {
-//             node.getParent().setRight(pivot);
-//         }
-//     } else {
-
-//         root = pivot;
-//     }
-//     if (!pivot.isEmpty()) {
-//         pivot.setParent(node.getParent());
-//     }
-// }
